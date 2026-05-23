@@ -3,7 +3,7 @@ import React from "react";
 const HomePage = () => {
     return (
         <div className="homepage-container">
-            <div>
+            <div className="input-container">
                 <input type="email" placeholder="Enter your email here" />
                 <input type="text" placeholder="Enter your Room code" />
                 <button>Enter Room</button>
