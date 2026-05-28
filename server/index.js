@@ -1,13 +1,18 @@
 const express = require("express");
-const bodyParser = require("body-parrser");
+const bodyParser = require("body-parser");
 const {Server} = require ("socket.io");
 
-const io = new Server(); 
+const io = new Server({
+    cors: true,
+}); 
 const app = express();
 
 app.use(bodyParser.json());
 
+const emailToSoketMapping = new Map();
+
 io.on("connection", socket => {
+    console.log("New Connection");  
     socket.on("join-room", (data) => {
         const { roomId, emailId } = data;
         console.log("User", emailId, "Joined Room", roomId);
@@ -18,4 +23,4 @@ io.on("connection", socket => {
 });
 
 app.listen(4000,  () => console.log("Http server running at PORT 4000"));
-io.listen(4001);
+io.listen(4001); 
