@@ -1,7 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
+
 import HomePage from './pages/Home';
 import { SocketProvider } from "./providers/socket";
+
 
 function App() {
   return (
@@ -14,6 +16,6 @@ function App() {
 
     </div>
   );
-}
+};
 
 export default App;

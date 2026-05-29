@@ -18,6 +18,7 @@ io.on("connection", socket => {
         console.log("User", emailId, "Joined Room", roomId);
         emailToSoketMapping.set(emailId, socket.id);
         socket.join(roomId);
+        socket.emit("joined-room", {roomId});
         socket.broadcast.to(roomId).emit("user-joined", { emailId })
     });
 });

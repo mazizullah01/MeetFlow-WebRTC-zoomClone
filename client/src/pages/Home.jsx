@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSocket } from "../providers/socket"
 
 const HomePage = () => {
     const { socket } = useSocket();
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState();
     const [roomId, setRoomId] = useState();
 
+    const handleRoomJoined = ({ roomId }) => {
+        navigate(`/room/${roomId}`);
+    };
+
+    useEffect(() => {
+        socket.on("joined-room", handleRoomJoined)
+    }, [socket]);
+
     const handleJoinRoom = () => {
         socket.emit("join-room", { emailId: email, roomId });
-    }
+    };
     return (
         <div className="homepage-container">
             <div className="input-container">
@@ -18,7 +28,7 @@ const HomePage = () => {
                 <button onClick={handleJoinRoom}>Enter Room</button>
              </div>
         </div>
-    )
-}
+    );
+};
 
 export default HomePage;
