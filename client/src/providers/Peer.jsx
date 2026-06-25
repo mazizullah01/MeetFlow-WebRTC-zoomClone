@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useMemo } from "react";
   
 const PeerContext  = React.createContext(null);
  
+export const usePeer =() => React.useContext(PeerContext);
+
 export const PeerProvider = (props) => {
     const peer = useMemo (() => new RTCPeerConnection({
         iceServers: [
@@ -27,3 +29,4 @@ const createOffer = async () => {
     </PeerContext.Provider>
     );
 };
+
