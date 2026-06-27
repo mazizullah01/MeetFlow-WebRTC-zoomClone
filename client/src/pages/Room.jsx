@@ -14,9 +14,21 @@ const RoomPage = () => {
         socket.emit("call-user", { emailId, offer });
     }, [ createOffer, socket]);
 
+    const handleIncomingCall = useCallback((data) => {
+        const { from, offer } = data;
+        console.log("Incoming call from", from , offer);
+    }, []);
+
     useEffect (() => {
         socket.on("user-joined", HandleNewUserJoined)
-    }, [socket]);
+        socket.on("incoming-call", handleIncomingCall);
+
+        return () =>  {
+        socket.off("user-joined", HandleNewUserJoined);
+        socket.off("incoming-call", handleIncomingCall);
+    }
+
+    }, [handleIncomingCall, HandleNewUserJoined, socket]);
 
     return(
         <div className="room-page-container">
