@@ -30,6 +30,12 @@ io.on("connection", socket => {
         const socketId = emailToSoketMapping.get(emailId);
         socket.to(socketId).emit("incoming-call", { from: fromEmail, offer  });
     }); 
+
+    socket.on("call-accepted", (data) => {
+        const { emailId, ans } = data;
+        const socketId = emailToSoketMapping.get(emailId);
+        socket.to(socketId).emit("call-accepted", { ans });  
+    });
 });
 
 app.listen(4000,  () => console.log("Http server running at PORT 4000"));
