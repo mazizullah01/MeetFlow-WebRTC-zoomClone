@@ -5,7 +5,7 @@ import { usePeer } from "../providers/Peer";
 
 const RoomPage = () => {
     const { socket } = useSocket();
-    const { peer, createOffer, createAnswer } = usePeer();
+    const { peer, createOffer, createAnswer, setRemoteAns } = usePeer();
 
     const HandleNewUserJoined = useCallback(async (data) => {
         const {emailId} = data
@@ -21,16 +21,24 @@ const RoomPage = () => {
         socket.emit("call-accepted", {emailId: from,  ans });
     }, [createAnswer, socket]);
 
+    const handleCallAcepted = useCallback (async(data) => {
+        const { ans } = data;
+        console.log("call got accepted", ans);
+        await setRemoteAns(ans);
+    }, [setRemoteAns]);
+
     useEffect (() => {
         socket.on("user-joined", HandleNewUserJoined)
         socket.on("incoming-call", handleIncomingCall);
+        socket.on("call-accepted", handleCallAcepted)
 
         return () =>  {
         socket.off("user-joined", HandleNewUserJoined);
         socket.off("incoming-call", handleIncomingCall);
+        socket.off("call-accepted", handleCallAcepted);
     }
 
-    }, [handleIncomingCall, HandleNewUserJoined, socket]);
+    }, [handleIncomingCall, HandleNewUserJoined, handleCallAcepted, socket]);
 
     return(
         <div className="room-page-container">
