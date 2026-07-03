@@ -34,6 +34,8 @@ const setRemoteAns = async (ans) => {
     await peer.setRemoteDescription(ans);
 };
 
+const
+
 return(
     <PeerContext.Provider value={{ peer, createOffer, createAnswer, setRemoteAns }}>
     {props.children}

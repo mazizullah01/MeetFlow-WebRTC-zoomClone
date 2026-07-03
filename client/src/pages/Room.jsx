@@ -54,7 +54,17 @@ const RoomPage = () => {
     return(
         <div className="room-page-container">
          <h1>Room Page</h1>
-         <ReactPlayer url={myStream} playing />
+         <video
+           autoPlay
+           muted
+           playsInline
+           ref={(video) => {
+           if (video && myStream) {
+          video.srcObject = myStream;
+       }
+    }}
+        style={{ width: "600px", height: "400px" }}
+    />
         </div>
     );
 };
