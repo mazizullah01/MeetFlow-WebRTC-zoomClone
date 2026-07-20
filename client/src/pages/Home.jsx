@@ -21,7 +21,7 @@ const HomePage = () => {
     }, [handleRoomJoined,  socket]);
 
     const handleJoinRoom = () => {
-        socket.emit("join-room", { emailId: email, roomId });
+        socket.emit("join-room", { emailId: email, roomId: roomId });
     };
     return (
         <div className="homepage-container">
