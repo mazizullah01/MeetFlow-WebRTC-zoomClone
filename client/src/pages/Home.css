@@ -1,0 +1,127 @@
+.homepage-container {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: 48px 24px;
+  background: radial-gradient(circle at 20% 20%, #192653 0, #0c1020 34%, #080a12 72%);
+}
+
+.home-glow {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: .2;
+  pointer-events: none;
+}
+
+.home-glow-one { background: #7357ff; top: -100px; right: 4%; }
+.home-glow-two { background: #21d4b4; bottom: -150px; left: 8%; }
+
+.home-content {
+  position: relative;
+  z-index: 1;
+  width: min(1100px, 100%);
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: clamp(48px, 8vw, 110px);
+  align-items: center;
+}
+
+.home-intro .brand-mark,
+.brand-name { display: inline-grid; vertical-align: middle; }
+
+.brand-mark {
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 13px;
+  color: white;
+  font-weight: 800;
+  background: linear-gradient(135deg, #7965ff, #5140df);
+  box-shadow: 0 10px 30px #6854ff55;
+}
+
+.brand-name { font-size: 19px; font-weight: 750; letter-spacing: -.02em; }
+
+.home-intro h1 {
+  max-width: 620px;
+  margin: 42px 0 20px;
+  font-size: clamp(42px, 5.4vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -.055em;
+  background: linear-gradient(120deg, #fff 30%, #aab5d8);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.home-intro > p {
+  max-width: 550px;
+  color: #9da7c3;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.feature-list { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 34px; color: #cbd2e7; font-size: 14px; }
+.feature-list span::first-letter { color: #6fe4c5; }
+
+.join-card {
+  padding: clamp(28px, 4vw, 42px);
+  border: 1px solid #ffffff12;
+  border-radius: 28px;
+  background: #141725cc;
+  box-shadow: 0 32px 90px #0007;
+  backdrop-filter: blur(18px);
+}
+
+.join-card-heading { margin-bottom: 30px; }
+.join-card-heading h2 { margin: 8px 0 7px; font-size: 29px; letter-spacing: -.03em; }
+.join-card-heading p, .join-card small { color: #858fa9; }
+.join-card-heading p { margin: 0; }
+.eyebrow { color: #8a7aff; font-size: 11px; font-weight: 800; letter-spacing: .14em; }
+
+.join-card label { display: block; margin: 20px 0; color: #cdd3e5; font-size: 13px; font-weight: 650; }
+.join-card input {
+  width: 100%;
+  margin-top: 9px;
+  padding: 15px 16px;
+  color: #f7f8ff;
+  outline: none;
+  border: 1px solid #2d3246;
+  border-radius: 12px;
+  background: #0e111d;
+  transition: border-color .2s, box-shadow .2s;
+}
+.join-card input:focus { border-color: #7866ff; box-shadow: 0 0 0 4px #7866ff1c; }
+.room-code-field { position: relative; }
+.room-code-field input { padding-right: 78px; }
+.room-code-field button { position: absolute; right: 7px; top: 16px; padding: 8px 10px; color: #a99eff; border: 0; background: transparent; cursor: pointer; font-size: 12px; font-weight: 750; }
+
+.join-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 28px 0 18px;
+  padding: 15px;
+  border: 0;
+  border-radius: 13px;
+  color: white;
+  font-weight: 750;
+  background: linear-gradient(135deg, #7866ff, #5947e8);
+  box-shadow: 0 13px 32px #5e49e944;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+}
+.join-button:hover { transform: translateY(-2px); box-shadow: 0 17px 38px #5e49e966; }
+.join-card small { display: block; text-align: center; font-size: 11px; }
+
+@media (max-width: 800px) {
+  .home-content { grid-template-columns: 1fr; gap: 40px; }
+  .home-intro h1 { margin-top: 30px; }
+  .feature-list { margin-top: 22px; }
+}

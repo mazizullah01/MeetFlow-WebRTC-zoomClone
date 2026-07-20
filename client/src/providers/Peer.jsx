@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState, useCallback } from "react";
+import React, { useMemo, useEffect, useRef, useState, useCallback } from "react";
   
 const PeerContext  = React.createContext(null);
  
@@ -6,6 +6,7 @@ export const usePeer =() => React.useContext(PeerContext);
 
 export const PeerProvider = (props) => {
     const [remoteStream, setRemoteStream] = useState(null);
+    const pendingCandidates = useRef([]);
     const peer = useMemo (() => new RTCPeerConnection({
         iceServers: [
             {
@@ -19,38 +20,38 @@ export const PeerProvider = (props) => {
   []
 );
 
-const waitForIceGathering = () => {
-    if (peer.iceGatheringState === "complete") return Promise.resolve();
-
-    return new Promise((resolve) => {
-        const handleStateChange = () => {
-            if (peer.iceGatheringState === "complete") {
-                peer.removeEventListener("icegatheringstatechange", handleStateChange);
-                resolve();
-            }
-        };
-
-        peer.addEventListener("icegatheringstatechange", handleStateChange);
-    });
+const applyPendingCandidates = async () => {
+    for (const candidate of pendingCandidates.current) {
+        await peer.addIceCandidate(candidate);
+    }
+    pendingCandidates.current = [];
 };
 
 const createOffer = async () => {
     const offer = await peer.createOffer();
     await peer.setLocalDescription(offer);
-    await waitForIceGathering();
     return peer.localDescription;
 }
 
 const createAnswer = async (offer) => {
     await peer.setRemoteDescription(offer);
+    await applyPendingCandidates();
     const answer = await peer.createAnswer();
     await peer.setLocalDescription(answer);
-    await waitForIceGathering();
     return peer.localDescription;
 }
 
 const setRemoteAns = async (ans) => {
     await peer.setRemoteDescription(ans);
+    await applyPendingCandidates();
+};
+
+const addIceCandidate = async (candidate) => {
+    if (peer.remoteDescription) {
+        await peer.addIceCandidate(candidate);
+    } else {
+        pendingCandidates.current.push(candidate);
+    }
 };
 
 const sendStream = async (stream) => {
@@ -87,6 +88,7 @@ return(
         createAnswer,
         setRemoteAns,
         sendStream, 
+        addIceCandidate,
         remoteStream,
      }}
     >

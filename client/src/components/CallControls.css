@@ -1,0 +1,10 @@
+.call-controls-wrap { position: fixed; z-index: 5; left: 0; right: 0; bottom: 24px; display: grid; place-items: center; pointer-events: none; }
+.call-controls { display: flex; gap: 8px; padding: 9px; border: 1px solid #ffffff18; border-radius: 18px; background: #161925df; box-shadow: 0 18px 55px #0008; backdrop-filter: blur(18px); pointer-events: auto; }
+.call-controls button { min-width: 76px; display: grid; place-items: center; gap: 4px; padding: 9px 12px; border: 0; border-radius: 12px; color: #e6e9f4; background: transparent; cursor: pointer; transition: background .2s, transform .2s; }
+.call-controls button:hover { background: #ffffff0d; transform: translateY(-1px); }
+.call-controls button:disabled { opacity: .4; cursor: wait; }
+.call-controls button span { font-size: 19px; }
+.call-controls button small { font-size: 10px; }
+.call-controls .control-off { color: #ff9a9a; background: #e94b4b18; }
+.call-controls .leave-button { color: white; background: #e54852; }
+.call-controls .leave-button:hover { background: #f2555e; }
