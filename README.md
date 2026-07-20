@@ -119,7 +119,7 @@ MeetFlow-WebRTC-zoomClone/
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/mazizullah01/MeetFlow-WebRTC-zoomClone.git
 cd MeetFlow-WebRTC-zoomClone
 ```
 
