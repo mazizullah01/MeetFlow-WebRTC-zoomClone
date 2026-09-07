@@ -177,5 +177,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Contact
 
-Created by **Azizullah**  
-Email: [m.azizullah420@gmail.com](mailto:m.azizullah420@gmail.com)
+For any questions or support, feel free to reach out:
+
+- Email: **m.azizullah420@gmail.com**
