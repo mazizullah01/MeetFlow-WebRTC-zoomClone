@@ -79,7 +79,7 @@ flowchart LR
     PeerA <-->|Direct peer-to-peer audio and video| PeerB
 ```
 
-The Socket.IO server is used only for connection setup. It relays room events, WebRTC offers and answers, and ICE candidates. After negotiation succeeds, audio and video travel directly between the two browsers.
+The Socket.IO server is used only for connection setup. It relays room events, WebRTC offers and answers, and ICE candidates. After negotiation succeeds, audio and video travel directly between the two browsers
 
 ## Call Flow
 
