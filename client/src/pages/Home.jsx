@@ -26,7 +26,8 @@ const HomePage = () => {
         if (!email.trim() || !roomId.trim()) return;
         socket.emit("join-room", { emailId: email.trim(), roomId: roomId.trim() });
     };
-
+    
+    // Generate a short random room code
     const createRoomCode = () => {
         setRoomId(Math.random().toString(36).slice(2, 8).toUpperCase());
     };
